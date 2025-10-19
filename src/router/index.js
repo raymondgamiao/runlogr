@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import RunsView from '@/views/RunsView.vue'
+import Dashboard from '../views/DashboardView.vue' 
 
 const routes = [
   {
     path: '/',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/runs',
     name: 'runs',
     component: RunsView,
-  },
-  // Optional: add a placeholder route for analytics or settings later
-  // {
-  //   path: '/analytics',
-  //   name: 'analytics',
-  //   component: () => import('@/views/AnalyticsView.vue'),
-  // },
+  }
 ]
 
 const router = createRouter({
