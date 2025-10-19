@@ -1,7 +1,17 @@
 import { defineStore } from 'pinia'
 import { db } from '@/firebase'
-import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore'
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  orderBy,
+} from 'firebase/firestore'
 import { useToast } from 'vue-toastification'
+const toast = useToast()
 
 export const useRunsStore = defineStore('runs', {
   state: () => ({
@@ -43,6 +53,33 @@ export const useRunsStore = defineStore('runs', {
         console.error('Error adding run:', error)
         toast.error('Failed to add run.')
       }
+    },
+
+    async updateRun(id, updatedData) {
+      const toast = useToast()
+      try {
+        const runRef = doc(db, 'runs', id)
+        await updateDoc(runRef, updatedData)
+        toast.success('Run updated successfully!')
+      } catch (err) {
+        console.error(err)
+        toast.error('Error updating run')
+      }
+    },
+
+    async deleteRun(id) {
+      const toast = useToast()
+      try {
+        await deleteDoc(doc(db, 'runs', id))
+        toast.success('Run deleted successfully!')
+      } catch (err) {
+        console.error(err)
+        toast.error('Error deleting run')
+      }
+    },
+
+    stopListener() {
+      if (this.unsubscribe) this.unsubscribe()
     },
   },
 })

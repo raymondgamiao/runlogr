@@ -3,7 +3,7 @@
     <div class="uk-grid-small" uk-grid>
       <div class="uk-width-1-5@s">
         <label class="uk-form-label">Date</label>
-        <VueDatePicker v-model="form.date" />
+        <VueDatePicker v-model="form.date" :is-24="false" />
       </div>
 
       <div class="uk-width-1-5@s">

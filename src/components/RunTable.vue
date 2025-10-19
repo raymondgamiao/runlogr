@@ -8,6 +8,7 @@
         <th>Duration</th>
         <th>Elevation (m)</th>
         <th>Notes</th>
+        <th class="uk-text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -18,12 +19,29 @@
         <td>{{ formatDuration(run.duration) }}</td>
         <td>{{ formatElevation(run.elevation) }}</td>
         <td>{{ run.notes }}</td>
+        <td class="uk-text-center">
+          <button
+            class="uk-button uk-button-default uk-button-small"
+            uk-toggle="target: #edit-modal"
+            @click="$emit('edit', run)"
+          >
+            Edit
+          </button>
+          <button
+            class="uk-button uk-button-danger uk-button-small uk-margin-small-left"
+            @click="$emit('delete', run.id)"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script setup>
+import { useRunsStore } from '@/stores/runStore'
+
 defineProps({
   runs: {
     type: Array,
