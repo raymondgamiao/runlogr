@@ -1,8 +1,14 @@
 <template>
   <div id="app" class="uk-container uk-margin-top">
+    <Navbar />
     <router-view />
   </div>
 </template>
+
+<script setup>
+import Navbar from './components/Navbar.vue'
+</script>
+
 
 <style scoped>
 body {
@@ -11,3 +17,4 @@ body {
   color: #333;
 }
 </style>
+
